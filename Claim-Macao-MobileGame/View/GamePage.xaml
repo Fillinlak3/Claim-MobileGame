@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Claim_Macao_MobileGame.ViewModel"
+             x:DataType="vm:GamePageViewModel"
+             x:Class="Claim_Macao_MobileGame.View.GamePage"
+             Appearing="OnAppearing">
+
+    <Grid x:Name="MainGrid" Background="Transparent" RowDefinitions="auto, auto, auto, *" RowSpacing="10">
+        <Image Grid.RowSpan="4" Aspect="AspectFill" Source="playing_cards.jpg"/>
+
+        <Grid Grid.Row="0" ColumnDefinitions="auto, *, auto" ColumnSpacing="15" Padding="10">
+            <ImageButton Grid.Column="0" Source="back.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Start"
+                         Command="{Binding GoBackComand}"/>
+            <Label Grid.Column="1" Text="Add score to players below." TextColor="White" FontSize="20" FontFamily="OpenSans-Semibold"/>
+            <Button Grid.Column="2" WidthRequest="20" HeightRequest="20" CornerRadius="0" VerticalOptions="Start"
+                    HorizontalOptions="End" Background="Transparent" Command="{Binding ShowScoreboardCommand}"/>
+        </Grid>
+
+        <Grid x:Name="PlayersGrid" Grid.Row="1" RowDefinitions="auto, auto, auto, auto, auto, auto" ColumnSpacing="15"
+              RowSpacing="10" ColumnDefinitions="*, *, *" VerticalOptions="Center" Padding="10, 0, 10, 0"
+              Background="Transparent">
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center" Spacing="30">
+            <Button Grid.Column="0" WidthRequest="220" Background="Green" TextColor="White" Text="UPDATE SCORE" FontSize="22"
+                    Clicked="UpdateScore" FontFamily="OpenSans-Semibold"/>
+            <Button Grid.Column="1" WidthRequest="100" Background="Red" TextColor="White" Text="RESET" FontSize="22"
+                    FontAttributes="Bold" Clicked="ResetScore"/>
+        </HorizontalStackLayout>
+
+        <StackLayout Grid.Row="3" Margin="0, 0, 0, 20" IsVisible="{Binding isVisibleScoreboard}" Background="#101516" Opacity=".8">
+            <Label Text="Players points" HorizontalOptions="Center" FontSize="24" TextColor="white" Margin="0, 0, 0, 10"/>
+            <ScrollView VerticalScrollBarVisibility="Always" VerticalOptions="FillAndExpand" WidthRequest="300">
+                <StackLayout>
+                    <Label x:Name="Scoreboard" Text="Here will be the player's points displayed" FontSize="18" TextColor="White"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        
+        </Grid>
+</ContentPage>
