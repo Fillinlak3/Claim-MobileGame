@@ -22,6 +22,7 @@
                   Background="Transparent">
                 <Grid.GestureRecognizers>
                     <SwipeGestureRecognizer Direction="Down" Swiped="SwipeToHideSettingsPanel"/>
+                    <TapGestureRecognizer Tapped="TapToHideKeyboard"/>
                 </Grid.GestureRecognizers>
 
                 <Entry Placeholder="Player 1" Grid.Row="0" Grid.Column="0"/>
@@ -67,7 +68,7 @@
                     <Slider Grid.Row="0" Grid.Column="0" WidthRequest="300" HorizontalOptions="Start"  VerticalOptions="End"
                             Margin="20" Minimum="6" Maximum="18" ValueChanged="PlayersSliderValueChanged"/>
                     <Label x:Name="SliderValueLabel" Grid.Row="0" Grid.Column="1" Text="6" HorizontalOptions="Center" VerticalOptions="Center"
-                           FontSize="20" Margin="0, 30, 10, 0" TextColor="White"/>
+                           FontSize="20" Margin="50, 30, 10, 0" TextColor="White"/>
 
                     <Label Grid.Row="1" Grid.Column="0" Text="Maximum Score:" FontSize="20" HorizontalOptions="Center"
                            VerticalOptions="Start" TextColor="White"/>

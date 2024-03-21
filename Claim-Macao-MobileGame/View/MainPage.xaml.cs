@@ -35,10 +35,57 @@ namespace Claim_Macao_MobileGame.View
                 (PlayersGrid.Children[5 + i] as Microsoft.Maui.Controls.View)!.IsVisible = true;
         }
 
+        private void HideKeyboard()
+        {
+            if (PlayersGrid.Children.Count == 0 || PlayersGrid is null)
+                throw new ArgumentNullException("All entries are null or empty.");
+
+            foreach (var child in SettingsPanel.Children)
+            {
+                if (child is Entry _entry && _entry is not null)
+                {
+                    _entry.IsEnabled = false;
+                    _entry.IsEnabled = true;
+                    break;
+                }
+            }
+
+            if (PlayersGrid.Children.All(x => x.IsEnabled == false))
+                return;
+
+            // Unfocus & hide keyboard.
+            foreach (var child in PlayersGrid.Children)
+            {
+                if (child is Entry _entry && _entry is not null)
+                {
+                    _entry.IsEnabled = false;
+                    _entry.IsEnabled = true;
+                }
+            }
+        }
+
+        private void EnablePlayersEntries(bool enable)
+        {
+            foreach (var entry in PlayersGrid.Children)
+            {
+                if (entry is Entry _entry && _entry is not null)
+                    _entry.IsEnabled = enable;
+            }
+        }
+
+        private void TapToHideKeyboard(object sender, TappedEventArgs e)
+        {
+            HideKeyboard();
+        }
+
         private async void SwipeToHideSettingsPanel(object sender, SwipedEventArgs e)
         {
+            HideKeyboard();
             if (SettingsPanel.IsVisible)
             {
+                // Enable all entries while settings panel is visible.
+                EnablePlayersEntries(true);
+
                 // Animate the settings panel to slide out of view
                 await SettingsPanel.TranslateTo(0, SettingsPanel.Height, 250, Easing.SinInOut);
 
@@ -51,6 +98,9 @@ namespace Claim_Macao_MobileGame.View
         {
             if (SettingsPanel.IsVisible == false)
             {
+                // Disable all entries while settings panel is visible.
+                EnablePlayersEntries(false);
+
                 // Make the settings panel visible
                 (BindingContext as MainPageViewModel)!.isVisibleSettingsPanel = true;
 

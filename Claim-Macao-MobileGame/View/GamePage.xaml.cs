@@ -66,8 +66,27 @@ namespace Claim_Macao_MobileGame.View
                         Placeholder = "score",
                         PlaceholderColor = Colors.GhostWhite,
                         FontFamily = "OpenSansRegular",
+                        Keyboard = Keyboard.Numeric,
                         HorizontalOptions = LayoutOptions.Center,
                         HorizontalTextAlignment = TextAlignment.Center
+                    };
+                    entry.Completed += (sender, args) =>
+                    {
+                        int index = -1;
+                        if (sender is Entry _entry && _entry is not null)
+                        {
+                            _entry.Unfocus();
+                            index = PlayersEntries.IndexOf(_entry);
+                        }
+
+                        // Something went wrong.
+                        if (index == -1) return;
+                        // Last entry.
+                        else if(index >= PlayersEntries.Count - 1)
+                        {
+                            HideKeyboard();
+                        }
+                        else PlayersEntries[index + 1].Focus();
                     };
                     PlayersEntries.Add(entry);
 
@@ -86,26 +105,23 @@ namespace Claim_Macao_MobileGame.View
             }
         }
 
-        //private void AddPlayersOnScreen2()
-        //{
-        //    // Reversing the iterations will resolve glitches.
-        //    for (int i = 18 - 1; i >= 0; i--)
-        //    {
-        //        (((PlayersGrid.Children[i] as Frame)!.Content 
-        //            as VerticalStackLayout)!.Children[0] as Label)!.Text = string.Empty;
-        //        (PlayersGrid.Children[i] as Frame)!.IsVisible = false;
-        //    }
+        private void HideKeyboard()
+        {
+            if (PlayersEntries.Count == 0 || PlayersEntries is null)
+                throw new ArgumentNullException("All entries are null or empty.");
 
-        //    for (int i = 0; i < App.GameManager.Players.Count; i++)
-        //    {
-        //        (((PlayersGrid.Children[i] as Frame)!.Content
-        //            as VerticalStackLayout)!.Children[0] as Label)!.Text = App.GameManager.Players[i].Name;
-        //        (PlayersGrid.Children[i] as Frame)!.IsVisible = true;
-        //    }
-        //}
+            // Unfocus & hide keyboard.
+            foreach (var entry in PlayersEntries)
+            {
+                entry.IsEnabled = false;
+                entry.IsEnabled = true;
+            }
+        }
 
         private void UpdateScoreboard()
         {
+            HideKeyboard();
+
             Scoreboard.Text = string.Empty;
             foreach (var player in App.GameManager.Players.OrderByDescending(p => p.Points))
                 Scoreboard.Text += $"{player.Name}: {player.Points} -- <State: {(player.GameOver == true ? "eliminated" : "playing")}>\n";
@@ -229,6 +245,16 @@ namespace Claim_Macao_MobileGame.View
                 AddPlayersOnScreen();
                 UpdateScoreboard();
             }
+        }
+
+        private void SwipeToHideKeyboard(object sender, SwipedEventArgs e)
+        {
+            HideKeyboard();
+        }
+
+        private void TapToHideKeyboard(object sender, TappedEventArgs e)
+        {
+            HideKeyboard();
         }
     }
 }

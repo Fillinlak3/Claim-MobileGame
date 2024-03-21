@@ -4,11 +4,15 @@
     {
         public static Model.GameManager GameManager { get; private set; }
 
+        static App()
+        {
+            GameManager = new Model.GameManager();
+        }
+
         public App()
         {
             InitializeComponent();
 
-            GameManager = new Model.GameManager();
             MainPage = new AppShell();
         }
     }
