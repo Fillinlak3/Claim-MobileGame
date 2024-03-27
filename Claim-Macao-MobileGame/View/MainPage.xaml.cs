@@ -212,5 +212,25 @@ namespace Claim_Macao_MobileGame.View
             }
             return true;
         }
+
+        private void Entry_Completed(object sender, EventArgs e)
+        {
+            int index = -1;
+            if (sender is Entry _entry && _entry is not null)
+            {
+                _entry.Unfocus();
+                index = PlayersGrid.IndexOf(_entry);
+            }
+
+            // Something went wrong.
+            if (index == -1) return;
+            // Last entry.
+            int maximumVisible = PlayersGrid.IndexOf(PlayersGrid.FirstOrDefault(x => x.Visibility == Visibility.Collapsed));
+            int maximumEntries = PlayersGrid.Count - 1;
+            //                 Last visible entry                     Last of entries
+            if ((maximumVisible != -1 && index >= maximumVisible) || index >= maximumEntries)
+                HideKeyboard();
+            else PlayersGrid[index + 1].Focus();
+        }
     }
 }

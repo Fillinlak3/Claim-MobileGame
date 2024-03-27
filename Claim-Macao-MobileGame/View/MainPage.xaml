@@ -25,26 +25,26 @@
                     <TapGestureRecognizer Tapped="TapToHideKeyboard"/>
                 </Grid.GestureRecognizers>
 
-                <Entry Placeholder="Player 1" Grid.Row="0" Grid.Column="0"/>
-                <Entry Placeholder="Player 2" Grid.Row="1" Grid.Column="0"/>
-                <Entry Placeholder="Player 3" Grid.Row="2" Grid.Column="0"/>
-                <Entry Placeholder="Player 4" Grid.Row="3" Grid.Column="0"/>
-                <Entry Placeholder="Player 5" Grid.Row="4" Grid.Column="0"/>
-                <Entry Placeholder="Player 6" Grid.Row="5" Grid.Column="0"/>
+                <Entry Placeholder="Player 1" Grid.Row="0" Grid.Column="0" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 2" Grid.Row="1" Grid.Column="0" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 3" Grid.Row="2" Grid.Column="0" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 4" Grid.Row="3" Grid.Column="0" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 5" Grid.Row="4" Grid.Column="0" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 6" Grid.Row="5" Grid.Column="0" Completed="Entry_Completed"/>
             
-                <Entry Placeholder="Player 7" Grid.Row="0" Grid.Column="1" IsVisible="false"/>
-                <Entry Placeholder="Player 8" Grid.Row="1" Grid.Column="1" IsVisible="false"/>
-                <Entry Placeholder="Player 9" Grid.Row="2" Grid.Column="1" IsVisible="false"/>
-                <Entry Placeholder="Player 10" Grid.Row="3" Grid.Column="1" IsVisible="false"/>
-                <Entry Placeholder="Player 11" Grid.Row="4" Grid.Column="1" IsVisible="false"/>
-                <Entry Placeholder="Player 12" Grid.Row="5" Grid.Column="1" IsVisible="false"/>
+                <Entry Placeholder="Player 7" Grid.Row="0" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 8" Grid.Row="1" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 9" Grid.Row="2" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 10" Grid.Row="3" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 11" Grid.Row="4" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 12" Grid.Row="5" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
 
-                <Entry Placeholder="Player 13" Grid.Row="0" Grid.Column="2" IsVisible="false"/>
-                <Entry Placeholder="Player 14" Grid.Row="1" Grid.Column="2" IsVisible="false"/>
-                <Entry Placeholder="Player 15" Grid.Row="2" Grid.Column="2" IsVisible="false"/>
-                <Entry Placeholder="Player 16" Grid.Row="3" Grid.Column="2" IsVisible="false"/>
-                <Entry Placeholder="Player 17" Grid.Row="4" Grid.Column="2" IsVisible="false"/>
-                <Entry Placeholder="Player 18" Grid.Row="5" Grid.Column="2" IsVisible="false"/>
+                <Entry Placeholder="Player 13" Grid.Row="0" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 14" Grid.Row="1" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 15" Grid.Row="2" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 16" Grid.Row="3" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 17" Grid.Row="4" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 18" Grid.Row="5" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
             </Grid>
 
             <!-- Bottomside Buttons -->
