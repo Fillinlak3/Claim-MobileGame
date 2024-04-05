@@ -35,19 +35,26 @@ namespace Claim_Macao_MobileGame.View
                 (PlayersGrid.Children[5 + i] as Microsoft.Maui.Controls.View)!.IsVisible = true;
         }
 
-        private void HideKeyboard()
+        private async void HideKeyboard()
         {
             if (PlayersGrid.Children.Count == 0 || PlayersGrid is null)
-                throw new ArgumentNullException("All entries are null or empty.");
+            { await DisplayAlert("Empty Value", "All entries are null or empty.", "OK"); return; }
 
-            foreach (var child in SettingsPanel.Children)
             {
-                if (child is Entry _entry && _entry is not null)
+                Entry entry = (SettingsPanel.Children.FirstOrDefault(x => x is Entry) as Entry)!;
+
+                // Replace with the unchanged value.
+                if (string.IsNullOrWhiteSpace(entry.Text) || entry.Text == "0")
                 {
-                    _entry.IsEnabled = false;
-                    _entry.IsEnabled = true;
-                    break;
+                    await DisplayAlert("Empty Value", "MaxPoints cannot be empty or 0.", "OK");
+                    entry.Text = App.GameManager.MaxPoints.ToString();
                 }
+                // If everything fine, set the MaxPoints to the input.
+                else App.GameManager.MaxPoints = int.Parse(entry.Text);
+
+                // Hide keyboard.
+                entry.IsEnabled = false;
+                entry.IsEnabled = true;
             }
 
             if (PlayersGrid.Children.All(x => x.IsEnabled == false))
@@ -215,12 +222,12 @@ namespace Claim_Macao_MobileGame.View
 
         private void Entry_Completed(object sender, EventArgs e)
         {
+            if (sender is not Entry || sender is null) return;
+
+            Entry entry = (sender as Entry)!;
+            entry.Unfocus();
             int index = -1;
-            if (sender is Entry _entry && _entry is not null)
-            {
-                _entry.Unfocus();
-                index = PlayersGrid.IndexOf(_entry);
-            }
+            index = PlayersGrid.IndexOf(entry);
 
             // Something went wrong.
             if (index == -1) return;
@@ -232,5 +239,43 @@ namespace Claim_Macao_MobileGame.View
                 HideKeyboard();
             else PlayersGrid[index + 1].Focus();
         }
+
+        private void PlayerNamesEntries_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Entry entry;
+            if (sender is Entry senderEntry && sender is not null) entry = senderEntry;
+            else return;
+
+            if (string.IsNullOrWhiteSpace(entry.Text))
+            { entry.Text = string.Empty; return; }
+
+            string entryText = entry.Text;
+            entryText = new string(entryText.Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
+            entry.Text = entryText;
+        }
+
+        private void MaxPointsEntry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Entry entry = (sender as Entry)! ?? throw new Exception("NOT.AN.ENTRY");
+
+            string points = new string(entry.Text.Where(c => char.IsDigit(c)).ToArray());
+
+            if (points.Length > 1 && points[0] == '0')
+                points = points.TrimStart('0');
+
+            entry.Text = points;
+        }
+
+        private void Entry_Unfocused(object sender, FocusEventArgs e)
+        {
+            if(sender is not Entry || sender is null) return;
+
+            Entry entry = (sender as Entry)!;
+
+            // Trim the entry for better looking.
+            if (string.IsNullOrWhiteSpace(entry.Text) == false)
+                entry.Text = entry.Text.Trim();
+        }
     }
 }
+ 

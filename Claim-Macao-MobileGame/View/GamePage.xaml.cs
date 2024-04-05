@@ -19,6 +19,10 @@ namespace Claim_Macao_MobileGame.View
             if (App.GameManager.Players.All(p => p.GameOver == false) == false)
                 return;
 
+            // Disable the button.
+            UpdateScoreBtn.IsEnabled = false;
+            UpdateScoreBtn.Background = new SolidColorBrush(Colors.DarkGray);
+
             AddPlayersOnScreen();
             UpdateScoreboard();
         }
@@ -88,11 +92,54 @@ namespace Claim_Macao_MobileGame.View
                         }
                         else PlayersEntries[index + 1].Focus();
                     };
+                    entry.TextChanged += (sender, e) =>
+                    {
+                        string points = new string(entry.Text.Where(c => char.IsDigit(c) || c == '-').ToArray());
+
+                        if (points.Length > 1 && points[0] == '0')
+                            points = points.TrimStart('0');
+
+                        entry.Text = points;
+
+                        if (PlayersEntries.Count == 0 || PlayersEntries is null) return;
+
+                        if (PlayersEntries.Any(x => string.IsNullOrWhiteSpace(x.Text) == false))
+                        {
+                            // Enable the button.
+                            UpdateScoreBtn.IsEnabled = true;
+                            UpdateScoreBtn.Background = new SolidColorBrush(Colors.Green);
+                        }
+                        else
+                        {
+                            // Disable the button.
+                            UpdateScoreBtn.IsEnabled = false;
+                            UpdateScoreBtn.Background = new SolidColorBrush(Colors.DarkGray);
+                        }
+                    };
                     PlayersEntries.Add(entry);
 
                     // Add Label and Entry to VerticalStackLayout
                     verticalStackLayout.Children.Add(label);
                     verticalStackLayout.Children.Add(entry);
+
+                    /* Add new functionions on Player's Frame:
+                        - Single tap to edit entry
+                        - Double tap to quickly erase the entry points.
+                     */
+                    var singleTapGestureRecognizer = new TapGestureRecognizer();
+                    singleTapGestureRecognizer.NumberOfTapsRequired = 1;
+                    singleTapGestureRecognizer.Tapped += (sender, e) =>
+                    {
+                        entry.Focus();
+                    };
+                    frame.GestureRecognizers.Add(singleTapGestureRecognizer);
+                    var doubleTapGestureRecognizer = new TapGestureRecognizer();
+                    doubleTapGestureRecognizer.NumberOfTapsRequired = 2;
+                    doubleTapGestureRecognizer.Tapped += (sender, e) =>
+                    {
+                        entry.Text = string.Empty;
+                    };
+                    frame.GestureRecognizers.Add(doubleTapGestureRecognizer);
 
                     // Set Content of Frame to VerticalStackLayout
                     frame.Content = verticalStackLayout;
@@ -127,12 +174,6 @@ namespace Claim_Macao_MobileGame.View
                 Scoreboard.Text += $"{player.Name}: {player.Points} -- <State: {(player.GameOver == true ? "eliminated" : "playing")}>\n";
         }
 
-        private bool isNumeric(string input)
-        {
-            // Ignore empty string inputs and consider as 0.
-            return string.IsNullOrWhiteSpace(input) || int.TryParse(input, out _);
-        }
-
         private void RearrangeGrid()
         {
             int row = 0;
@@ -155,77 +196,62 @@ namespace Claim_Macao_MobileGame.View
 
         private async void UpdateScore(object sender, EventArgs e)
         {
-            try
+            // Firstly disable the button.
+            UpdateScoreBtn.IsEnabled = false;
+            UpdateScoreBtn.Background = new SolidColorBrush(Colors.DarkGray);
+
+            // Then hide the keyboard.
+            HideKeyboard();
+
+            /*
+                If every input is numeric, then add the corresponding points to each player. 
+                If nothing is inputed, then it will automatically add 0.
+                Clear the entries.
+             */
+            List<Model.Player> RemainingPlayers = App.GameManager.Players.Where(p => p.GameOver == false).ToList();
+            for (int i = 0; i < RemainingPlayers.Count; i++)
             {
-                // Check if all entries are numeric.
-                bool noNumericEntries = true;
-                foreach(var entry in PlayersEntries)
+                string pointsText = PlayersEntries[i].Text;
+                PlayersEntries[i].Text = string.Empty;
+                RemainingPlayers[i].Points += string.IsNullOrWhiteSpace(pointsText) ? 0 : int.Parse(pointsText);
+            }
+
+            // Check players in-game state.
+            int removedCount = 0;
+            foreach (var player in RemainingPlayers)
+            {
+                // Reset players score if it's same as the maximum score.
+                if(player.Points == App.GameManager.MaxPoints)
                 {
-                    string pointsText = entry.Text;
-
-                    if (isNumeric(pointsText) == false)
-                        throw new Exception("Letters shouldn't exist in a number-like score.");
-
-                    if (string.IsNullOrWhiteSpace(pointsText) == false) noNumericEntries = false;
+                    player.Points = 0;
+                    player.GameOver = false;
+                    await DisplayAlert("So lucky!", $"{player.Name}'s score reset.", "OK");
                 }
-
-                // Check if all entries are blank.
-                if (noNumericEntries) throw new Exception("Empty slots. No points added.");
-
-                /*
-                    If every input is numeric, then add the corresponding points to each player. 
-                    If nothing is inputed, then it will automatically add 0.
-                    Clear the entries.
-                 */
-                List<Model.Player> RemainingPlayers = App.GameManager.Players.Where(p => p.GameOver == false).ToList();
-                for (int i = 0; i < RemainingPlayers.Count; i++)
+                // Skip the already removed player.
+                else if(player.Points > App.GameManager.MaxPoints)
                 {
-                    string pointsText = PlayersEntries[i].Text;
-                    PlayersEntries[i].Text = string.Empty;
-                    RemainingPlayers[i].Points += string.IsNullOrWhiteSpace(pointsText) ? 0 : int.Parse(pointsText);
-                }
-
-                // Check players in-game state.
-                int removedCount = 0;
-                foreach (var player in RemainingPlayers)
-                {
-                    // Reset players score if it's same as the maximum score.
-                    if(player.Points == App.GameManager.MaxPoints)
-                    {
-                        player.Points = 0;
-                        player.GameOver = false;
-                        await DisplayAlert("So lucky!", $"{player.Name}'s score reset.", "OK");
-                    }
-                    // Skip the already removed player.
-                    else if(player.Points > App.GameManager.MaxPoints)
-                    {
-                        player.GameOver = true;
-                        await DisplayAlert("Eliminated", $"{player.Name} was eliminated.", "OK");
-                        int indexWhere = RemainingPlayers.IndexOf(player) - removedCount++;
-                        Debug.WriteLine(indexWhere);
-                        PlayersGrid.Children.RemoveAt(indexWhere);
-                        PlayersEntries.RemoveAt(indexWhere);
-                        RearrangeGrid();
-                    }
-                }
-                // Update the list after checks.
-                RemainingPlayers.RemoveAll(p => p.GameOver == true);
-                
-                UpdateScoreboard();
-
-                // Check for winner.
-                if (RemainingPlayers.Count == 1)
-                {
-                    await DisplayAlert("CONGRATULATIONS!",
-                        $"The winner is: {RemainingPlayers.First().Name}", "GG");
-                    App.GameManager.Players.Clear();
-
-                    (BindingContext as GamePageViewModel)!.GoBackComand.Execute(null);
+                    player.GameOver = true;
+                    await DisplayAlert("Eliminated", $"{player.Name} was eliminated.", "OK");
+                    int indexWhere = RemainingPlayers.IndexOf(player) - removedCount++;
+                    Debug.WriteLine(indexWhere);
+                    PlayersGrid.Children.RemoveAt(indexWhere);
+                    PlayersEntries.RemoveAt(indexWhere);
+                    RearrangeGrid();
                 }
             }
-            catch(Exception ex)
+            // Update the list after checks.
+            RemainingPlayers.RemoveAll(p => p.GameOver == true);
+                
+            UpdateScoreboard();
+
+            // Check for winner.
+            if (RemainingPlayers.Count == 1)
             {
-                await DisplayAlert("Couldn't update score", ex.Message, "OK");
+                await DisplayAlert("CONGRATULATIONS!",
+                    $"The winner is: {RemainingPlayers.First().Name}", "GG");
+                App.GameManager.Players.Clear();
+
+                (BindingContext as GamePageViewModel)!.GoBackComand.Execute(null);
             }
         }
 

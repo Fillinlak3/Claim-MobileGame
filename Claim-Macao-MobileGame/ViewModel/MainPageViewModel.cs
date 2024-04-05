@@ -1,4 +1,5 @@
 ﻿using Claim_Macao_MobileGame.Command;
+using System.Diagnostics;
 
 namespace Claim_Macao_MobileGame.ViewModel
 {
@@ -7,11 +8,7 @@ namespace Claim_Macao_MobileGame.ViewModel
         public int MaximumPoints
         {
             get => App.GameManager.MaxPoints;
-            set
-            {
-                App.GameManager.MaxPoints = value;
-                OnPropertyChanged();
-            }
+            set { }
         }
 
         private bool _isVisibleBottomPanel = true;

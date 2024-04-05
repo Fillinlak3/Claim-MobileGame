@@ -25,26 +25,44 @@
                     <TapGestureRecognizer Tapped="TapToHideKeyboard"/>
                 </Grid.GestureRecognizers>
 
-                <Entry Placeholder="Player 1" Grid.Row="0" Grid.Column="0" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 2" Grid.Row="1" Grid.Column="0" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 3" Grid.Row="2" Grid.Column="0" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 4" Grid.Row="3" Grid.Column="0" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 5" Grid.Row="4" Grid.Column="0" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 6" Grid.Row="5" Grid.Column="0" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 1" Grid.Row="0" Grid.Column="0" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 2" Grid.Row="1" Grid.Column="0" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 3" Grid.Row="2" Grid.Column="0" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 4" Grid.Row="3" Grid.Column="0" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 5" Grid.Row="4" Grid.Column="0" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 6" Grid.Row="5" Grid.Column="0" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
             
-                <Entry Placeholder="Player 7" Grid.Row="0" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 8" Grid.Row="1" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 9" Grid.Row="2" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 10" Grid.Row="3" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 11" Grid.Row="4" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 12" Grid.Row="5" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 7" Grid.Row="0" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 8" Grid.Row="1" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 9" Grid.Row="2" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 10" Grid.Row="3" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 11" Grid.Row="4" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 12" Grid.Row="5" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
 
-                <Entry Placeholder="Player 13" Grid.Row="0" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 14" Grid.Row="1" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 15" Grid.Row="2" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 16" Grid.Row="3" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 17" Grid.Row="4" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
-                <Entry Placeholder="Player 18" Grid.Row="5" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"/>
+                <Entry Placeholder="Player 13" Grid.Row="0" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 14" Grid.Row="1" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 15" Grid.Row="2" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 16" Grid.Row="3" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 17" Grid.Row="4" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+                <Entry Placeholder="Player 18" Grid.Row="5" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
+                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
             </Grid>
 
             <!-- Bottomside Buttons -->
@@ -68,12 +86,12 @@
                     <Slider Grid.Row="0" Grid.Column="0" WidthRequest="300" HorizontalOptions="Start"  VerticalOptions="End"
                             Margin="20" Minimum="6" Maximum="18" ValueChanged="PlayersSliderValueChanged"/>
                     <Label x:Name="SliderValueLabel" Grid.Row="0" Grid.Column="1" Text="6" HorizontalOptions="Center" VerticalOptions="Center"
-                           FontSize="20" Margin="50, 30, 10, 0" TextColor="White"/>
+                           FontSize="20" Margin="25, 25, 0, 0" TextColor="White"/>
 
                     <Label Grid.Row="1" Grid.Column="0" Text="Maximum Score:" FontSize="20" HorizontalOptions="Center"
                            VerticalOptions="Start" TextColor="White"/>
                     <Entry Grid.Row="1" Grid.Column="0" Placeholder="Points" HorizontalOptions="End" VerticalOptions="Start"
-                           Margin="0, -10, 0, 0" Text="{Binding MaximumPoints}"/>
+                           Margin="0, -10, 0, 0" Keyboard="Numeric" TextChanged="MaxPointsEntry_TextChanged" Text="{Binding MaximumPoints}"/>
                 </Grid>
             </Grid>
         </Grid>
