@@ -5,94 +5,102 @@
              x:DataType="vm:MainPageViewModel"
              x:Class="Claim_Macao_MobileGame.View.MainPage">
 
-    <Grid x:Name="MainGrid" Background="Transparent">
+    <Grid x:Name="MainGrid" RowDefinitions="25*, 60*, 15*" Background="Transparent">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapToHideKeyboard"/>
+            <SwipeGestureRecognizer Direction="Down" Swiped="SwipeToHideSettingsPanel"/>
+        </Grid.GestureRecognizers>
         <Image Grid.RowSpan="3" Aspect="AspectFill" Source="playing_cards.jpg"/>
-        <Grid RowDefinitions="25*, 50*, 25*" Background="Transparent">
-            <!-- Page Title -->
-            <Label Grid.Row="0" Text="Claim Game" FontSize="36" HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center" Margin="0, -85, 0, 0" TextColor="White" FontFamily="OpenSansSemibold"/>
-            <Label Grid.Row="0" Text="Made by Bucurie" FontSize="22" HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center" Margin="0, -20, 0, 0" TextColor="White" FontFamily="OpenSansSemibold"/>
+
+        <!-- App Title -->
+        <Grid Grid.Row="0" RowDefinitions="50*, 25*, 25*" Background="Transparent">
+            <Label Grid.Row="0" Text="Claim Game" FontSize="42" HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="End" TextColor="White" FontFamily="OpenSansSemibold"/>
+            <Label Grid.Row="1" Text="Made by Bucurie" FontSize="26" HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Start" TextColor="White" FontFamily="OpenSansSemibold"/>
 
             <!-- Body content -->
-            <Label Grid.Row="0" Text="Enter player names below." FontSize="20" VerticalOptions="End" TextColor="White"
+            <Label Grid.Row="2" Text="Enter player names below." FontSize="20" VerticalOptions="End" TextColor="White"
                    Padding="25, 0, 0, 0" FontFamily="OpenSansRegular"/>
-            <Grid x:Name="PlayersGrid" Grid.Row="1" RowDefinitions="auto, auto, auto, auto, auto, auto" ColumnSpacing="40"
-                  ColumnDefinitions="80, 80, 80" RowSpacing="20" VerticalOptions="Center" HorizontalOptions="Center"
-                  Background="Transparent">
-                <Grid.GestureRecognizers>
-                    <SwipeGestureRecognizer Direction="Down" Swiped="SwipeToHideSettingsPanel"/>
-                    <TapGestureRecognizer Tapped="TapToHideKeyboard"/>
-                </Grid.GestureRecognizers>
+        </Grid>
 
-                <Entry Placeholder="Player 1" Grid.Row="0" Grid.Column="0" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 2" Grid.Row="1" Grid.Column="0" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 3" Grid.Row="2" Grid.Column="0" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 4" Grid.Row="3" Grid.Column="0" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 5" Grid.Row="4" Grid.Column="0" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 6" Grid.Row="5" Grid.Column="0" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-            
-                <Entry Placeholder="Player 7" Grid.Row="0" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 8" Grid.Row="1" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 9" Grid.Row="2" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 10" Grid.Row="3" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 11" Grid.Row="4" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 12" Grid.Row="5" Grid.Column="1" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+        <!-- Players Entries - App Body -->
+        <Grid x:Name="PlayersGrid" Grid.Row="1" RowDefinitions="auto, auto, auto, auto, auto, auto" ColumnSpacing="40"
+                RowSpacing="40" ColumnDefinitions="90, 90, 90" VerticalOptions="Center" HorizontalOptions="Center"
+                Background="Transparent">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapToHideKeyboard"/>
+                <SwipeGestureRecognizer Direction="Down" Swiped="SwipeToHideSettingsPanel"/>
+            </Grid.GestureRecognizers>
 
-                <Entry Placeholder="Player 13" Grid.Row="0" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 14" Grid.Row="1" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 15" Grid.Row="2" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 16" Grid.Row="3" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 17" Grid.Row="4" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
-                <Entry Placeholder="Player 18" Grid.Row="5" Grid.Column="2" IsVisible="false" Completed="Entry_Completed"
-                       Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 1" Grid.Row="0" Grid.Column="0" IsVisible="True" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 2" Grid.Row="1" Grid.Column="0" IsVisible="True" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 3" Grid.Row="2" Grid.Column="0" IsVisible="True" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 4" Grid.Row="3" Grid.Column="0" IsVisible="True" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 5" Grid.Row="4" Grid.Column="0" IsVisible="True" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 6" Grid.Row="5" Grid.Column="0" IsVisible="True" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+
+            <Entry Placeholder="Player 7" Grid.Row="0" Grid.Column="1" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 8" Grid.Row="1" Grid.Column="1" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 9" Grid.Row="2" Grid.Column="1" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 10" Grid.Row="3" Grid.Column="1" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 11" Grid.Row="4" Grid.Column="1" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 12" Grid.Row="5" Grid.Column="1" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+
+            <Entry Placeholder="Player 13" Grid.Row="0" Grid.Column="2" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 14" Grid.Row="1" Grid.Column="2" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 15" Grid.Row="2" Grid.Column="2" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 16" Grid.Row="3" Grid.Column="2" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 17" Grid.Row="4" Grid.Column="2" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+            <Entry Placeholder="Player 18" Grid.Row="5" Grid.Column="2" IsVisible="False" HorizontalTextAlignment="Center"
+                   Completed="Entry_Completed" Unfocused="Entry_Unfocused" TextChanged="PlayerNamesEntries_TextChanged"/>
+        </Grid>
+
+        <!-- Bottomside Buttons -->
+        <Grid Grid.Row="2" Background="Transparent">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapToHideKeyboard"/>
+                <SwipeGestureRecognizer Direction="Down" Swiped="SwipeToHideSettingsPanel"/>
+            </Grid.GestureRecognizers>
+
+            <Grid ColumnDefinitions="75*, 25*" Background="Transparent" IsVisible="{Binding isVisibleBottomPanel}">
+                <Button Grid.Column="0" Text="Start Game" Background="Red" TextColor="White" FontSize="30" FontAttributes="Bold"
+                        BorderWidth="0" BorderColor="Transparent" WidthRequest="280" HorizontalOptions="Start" VerticalOptions="Center"
+                        CornerRadius="50" Margin="25, -30, 0, 0" Clicked="StartGameButton"/>
+                <ImageButton Grid.Column="1" Source="settings.jpg" WidthRequest="35" VerticalOptions="Center" HorizontalOptions="Center"
+                             Margin="-10, -30, 0, 0" Clicked="SettingsButton"/>
             </Grid>
 
-            <!-- Bottomside Buttons -->
-            <Grid Grid.Row="2" Background="Transparent">
-                <Grid.GestureRecognizers>
-                    <SwipeGestureRecognizer Direction="Down" Swiped="SwipeToHideSettingsPanel"/>
-                </Grid.GestureRecognizers>
+            <!-- Game Settings -->
+            <Grid x:Name="SettingsPanel" RowDefinitions="50*, 50*" RowSpacing="20" ColumnDefinitions="75*, 25*" Background="Transparent"
+                    IsVisible="{Binding isVisibleSettingsPanel}">
 
-                <Grid ColumnDefinitions="75*, 25*" Background="Transparent" IsVisible="{Binding isVisibleBottomPanel}">
-                    <Button Grid.Column="0" Text="Start Game" Background="Red" TextColor="White" FontSize="30" FontAttributes="Bold"
-                            BorderWidth="0" BorderColor="Transparent" WidthRequest="265" HorizontalOptions="Start" VerticalOptions="Center"
-                            CornerRadius="50" Margin="25, 0, 0, 0" Clicked="StartGameButton"/>
-                    <ImageButton Grid.Column="1" Source="settings.jpg" WidthRequest="35" VerticalOptions="Center" HorizontalOptions="Center"
-                                 Clicked="SettingsButton"/>
-                </Grid>
-            
-                <!-- Game Settings -->
-                <Grid x:Name="SettingsPanel" RowDefinitions="50*, 50*" RowSpacing="20" ColumnDefinitions="75*, 25*" Background="Transparent"
-                      IsVisible="{Binding isVisibleSettingsPanel}">
+                <Slider Grid.Row="0" Grid.Column="0" WidthRequest="300" HorizontalOptions="Start"  VerticalOptions="End"
+                        Margin="20" Minimum="6" Maximum="18" ValueChanged="PlayersSliderValueChanged"/>
+                <Label x:Name="SliderValueLabel" Grid.Row="0" Grid.Column="1" Text="6" HorizontalOptions="Start" VerticalOptions="Center"
+                        FontSize="20" Margin="25, 0, 0, 0" TextColor="White"/>
 
-                    <Slider Grid.Row="0" Grid.Column="0" WidthRequest="300" HorizontalOptions="Start"  VerticalOptions="End"
-                            Margin="20" Minimum="6" Maximum="18" ValueChanged="PlayersSliderValueChanged"/>
-                    <Label x:Name="SliderValueLabel" Grid.Row="0" Grid.Column="1" Text="6" HorizontalOptions="Center" VerticalOptions="Center"
-                           FontSize="20" Margin="25, 25, 0, 0" TextColor="White"/>
-
-                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Score:" FontSize="20" HorizontalOptions="Center"
-                           VerticalOptions="Start" TextColor="White"/>
-                    <Entry Grid.Row="1" Grid.Column="0" Placeholder="Points" HorizontalOptions="End" VerticalOptions="Start"
-                           Margin="0, -10, 0, 0" Keyboard="Numeric" TextChanged="MaxPointsEntry_TextChanged" Text="{Binding MaximumPoints}"/>
-                </Grid>
+                <Label Grid.Row="1" Grid.Column="0" Text="Maximum Score:" FontSize="20" HorizontalOptions="Center"
+                        VerticalOptions="Start" TextColor="White"/>
+                <Entry Grid.Row="1" Grid.Column="0" Placeholder="Points" HorizontalOptions="End" VerticalOptions="Start" HorizontalTextAlignment="Center"
+                        Margin="0, -10, 0, 0" Keyboard="Numeric" TextChanged="MaxPointsEntry_TextChanged" Text="{Binding MaximumPoints}"/>
             </Grid>
         </Grid>
     </Grid>

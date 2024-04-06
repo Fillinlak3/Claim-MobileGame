@@ -26,14 +26,14 @@
             </Grid.GestureRecognizers>
         </Grid>
 
-        <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center" Spacing="30">
+        <HorizontalStackLayout Grid.Row="2" Padding="0, 10, 0, 10" HorizontalOptions="Center" Spacing="30">
             <Button x:Name="UpdateScoreBtn" Grid.Column="0" WidthRequest="220" Background="Green" TextColor="White"
                     Text="UPDATE SCORE" FontSize="22" Clicked="UpdateScore" FontFamily="OpenSans-Semibold"/>
             <Button Grid.Column="1" WidthRequest="100" Background="Red" TextColor="White" Text="RESET" FontSize="22"
                     FontAttributes="Bold" Clicked="ResetScore"/>
         </HorizontalStackLayout>
 
-        <StackLayout Grid.Row="3" Margin="0, 0, 0, 20" IsVisible="{Binding isVisibleScoreboard}" Background="#101516" Opacity=".8">
+        <StackLayout Grid.Row="3" Margin="0, 0, 0, 10" IsVisible="{Binding isVisibleScoreboard}" Background="#101516" Opacity=".8">
             <Label Text="Players points" HorizontalOptions="Center" FontSize="24" TextColor="white" Margin="0, 0, 0, 10"/>
             <ScrollView VerticalScrollBarVisibility="Always" VerticalOptions="FillAndExpand" WidthRequest="300">
                 <StackLayout>
