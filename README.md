@@ -28,11 +28,13 @@ We're still working for iOS devices, although everybody asks for launching the a
 - **Points Entries** that are left blank are considered 0. In this way, you only add the points that add up.
 
 ## Features
-- New game.
+- **New game**
   - Will start a new game with the new changes.
-- Resume game.
-  - 
-- Reset score.
+- **Resume game**
+  - Return to current started game without any modifications.
+- **Go back to Menu**
+  - Go back to make modifications with the posibility to resume or start a new game.
+- **Reset score**
 
 ## Restrictions
 - **Player Names**
@@ -48,4 +50,5 @@ We're still working for iOS devices, although everybody asks for launching the a
   - Numbers starting with 0 will be trimmed. (ex: `0123` or `00123` --> `123`)
 
 ## Future updates
+- Release build for iOS devices.
 
