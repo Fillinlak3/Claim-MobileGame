@@ -38,6 +38,8 @@
 		<Authors>Bucuriee</Authors>
 		<Company>FillInHack</Company>
 		<Copyright>FillInHack Inc.</Copyright>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<SignAssembly>False</SignAssembly>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
