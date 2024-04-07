@@ -4,7 +4,7 @@
 ## About
 Claim Game is not an actual mobile game, it's a points-adding application for card games with your friends. <br />
 This application will do the math for you by adding the points to each player.
-You just need to add the players, start the game and the application and then after every round you pass each other's points into the app.
+You just need to add the players, start the game and the application and then after each round you pass points to everyone into the app.
 > [!NOTE]
 > Card games such as Claim, Macao, etc.. <br />
 > Any card game where you have to add points to each player.
