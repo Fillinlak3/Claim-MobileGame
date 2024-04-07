@@ -52,3 +52,8 @@ We're still working for iOS devices, although everybody asks for launching the a
 ## Future updates
 - Release build for iOS devices.
 
+## Contributing
+**Claim Game** project is still in development for a better user experience.
+Please feel free to suggest modifications by sending a push request with an afferent description of your changes.
+> [!TIP]
+> Keep in mind to debug often after any code modifications to assure it's bug-free.
