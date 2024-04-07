@@ -1,4 +1,6 @@
 # Claim Game
+![Hero image for Claim Game](doc/images/overview/App_Launcher_Large.png)
+
 ## About
 Claim Game is not an actual mobile game, it's a points-adding application for card games in real life. <br />
 This application will do the math for you by adding the points to each player.
