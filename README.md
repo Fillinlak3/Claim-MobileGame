@@ -8,7 +8,7 @@ You just need to add the players, start the game and the application and then af
 > Any card game where you have to add points to each player.
 
 ## Installing and running Claim Game
-For the moment, the product is released only for Android devices.
+For the moment, the product is released only for Android `7.0` or higher devices.
 We're still working for iOS devices, although everybody asks for launching the app on this platform.
 
 ## How to use Claim Game
